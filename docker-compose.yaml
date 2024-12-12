@@ -1,0 +1,12 @@
+version: "3.9"
+
+services:
+  python-delivery-simulation:
+    image: python:latest
+    container_name: python-delivery-simulation
+    working_dir: /app
+    volumes:
+      - .:/app
+    command: sh -c "pip install mypy flake8 && tail -f /dev/null"
+    stdin_open: true
+    tty: true
