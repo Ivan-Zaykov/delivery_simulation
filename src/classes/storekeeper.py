@@ -1,7 +1,8 @@
 import time
-from .worker import Worker 
+from .worker import Worker
 
-class Picker(Worker):
+
+class Storekeeper(Worker):
     def assign_order(self, order):
         self.is_available = False
         print(f"Сборщик {self.name} начал сборку заказа {order.id}.")

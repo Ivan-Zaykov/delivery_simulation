@@ -1,31 +1,53 @@
-from classes.warehouse import Warehouse
-from classes.picker import Picker
+from classes.store import Store
+from classes.storekeeper import Storekeeper
 from classes.courier import Courier
 from classes.order import Order
+from classes.provider import Provider
+from classes.item import Item
 
-# Инициализация склада и работников
-# Инициализация склада и работников
-warehouse = Warehouse()
+item = Item(name="Example Item", cost_price=50.0)
 
-picker1 = Picker("Сборщик 1")
+# Инициализация поставщиков
+provider = Provider("Example поставщик")
+provider.addItem(item)
+
+# Инициализация склада
+store = Store()
+
+# Добавляем поставщиков склада
+store.registerProvider(provider)
+
+# Заказываем товары
+store.requestProductsFromProviders("яблоки", 60)
+print("Склад после заказа яблок:", store.stock)
+print("Остатки у поставщиков:", provider1.inventory, provider2.inventory)
+
+store.requestProductsFromProviders("бананы", 30)
+print("Склад после заказа бананов:", store.stock)
+print("Остатки у поставщиков:", provider1.inventory, provider2.inventory)
+
+# Добавляем товары на склад
+store.add_stock("яблоки", 10)
+print("Склад после добавления яблок:", store.stock)
+store.add_stock("бананы", 10)
+print("Склад после добавления бананов:", store.stock)
+
+# Инициализация работников
+storekeeper1 = Storekeeper("Кладовщик 1")
 courier1 = Courier("Курьер 1")
 
-warehouse.workers.append(picker1)
-warehouse.workers.append(courier1)
-
-# Добавляем сток на склад
-warehouse.add_stock("Pizza", 10)
-warehouse.add_stock("Soda", 20)
+store.workers.append(storekeeper1)
+store.workers.append(courier1)
 
 # Добавляем заказ
 customer = type('Customer', (object,), {"address": (60, 70)})
 order1 = Order(customer, {"Pizza": 2, "Soda": 1}, 1)
-warehouse.process_order(order1)
+store.process_order(order1)
 
 # Назначаем сборщика и курьера
-warehouse.assign_picker(order1)
-warehouse.assign_courier(order1)
+store.assign_storekeeper(order1)
+store.assign_courier(order1)
 
 # Завершаем смену работников
-picker1.end_shift()
+storekeeper1.end_shift()
 courier1.end_shift()
