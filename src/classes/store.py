@@ -6,7 +6,7 @@ class Store:
     def __init__(self, name):
         self.name = name
         self.stock = {}  # Словарь: товар -> количество
-        self.orders = []  # Очередь заказов
+        self.orders = {}  # Словарь: id заказа -> состав
         self.order_counter = 0  # Счётчик для уникальных ID заказов
         self.workers = []  # Все работники
         print(f"Инициализирован склад `{self.name}`")
@@ -21,12 +21,17 @@ class Store:
             print(f"Склад `{self.name}`: добавлено {qty} единиц товара '{item}'")
 
     def process_order(self, order):
+        self.assign_order_id_and_items_count(order)
+        self.assign_storekeeper(order)
+        self.assign_courier(order)
+
+    def assign_order_id_and_items_count(self, order):
         print(f"Склад `{self.name}`: получен заказ {order}")
 
         self.order_counter += 1
         order.id = self.order_counter
         print(f"Склад `{self.name}`: заказу назначен id {self.order_counter}")
-        self.orders.append(order)
+        self.orders[order.id] = order
 
         available_items = {}
         for item, qty in order.items.items():
@@ -38,9 +43,6 @@ class Store:
                 self.stock[item] = 0
         order.items = available_items  # Обновляем заказ
         print(f"Склад `{self.name}`: заказ {order.id} готов к сборке: {order.items}")
-
-        self.assign_storekeeper(order)
-        self.assign_courier(order)
 
     def assign_storekeeper(self, order):
         storekeeper = next((w for w in self.workers if isinstance(w, Storekeeper) and w.is_available()), None)

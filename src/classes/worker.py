@@ -9,11 +9,12 @@ class Worker:
         self.name = name
         self.shift_hours = 0
         self.shift_start = None
+        self.current_order = None
 
     def start_shift(self, hours):
         self.shift_start = GlobalVirtualTime.get_current_time().time()
         self.shift_hours = hours
-        print(f"`{self.name}` начал смену на {hours} часов.")
+        print(f"`{self.name}` в {self.shift_start} начал смену на {hours} часов.")
 
     def end_shift(self):
         salary = self.shift_hours * Constants.HOURLY_PAY
