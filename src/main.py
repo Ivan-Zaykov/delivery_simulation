@@ -3,12 +3,25 @@ from classes.storekeeper import Storekeeper
 from classes.courier import Courier
 from classes.order import Order
 from classes.customer import Customer
-
+from src.classes.supplier import Supplier
 
 # Инициализация поставщиков
+supplier = Supplier('Поставщик 1')
 
 # Инициализация склада
-store = Store()
+store = Store('Склад 1')
+
+# Необходимые товары
+goods = {
+    "Pizza": 10,
+    "Soda": 20
+}
+
+# Поставщик доставляет товары на склад
+supplier.deliver_goods(goods)
+
+# Склад обновляет стоки
+store.update_stocks(goods)
 
 # Инициализируем и добавляем работников (кладовщика и курьера) на склад
 storekeeper1 = Storekeeper("Сборщик 1")
@@ -16,12 +29,8 @@ courier1 = Courier("Курьер 1")
 store.workers.append(storekeeper1)
 store.workers.append(courier1)
 
-# Добавляем сток на склад
-store.add_stock("Pizza", 10)
-store.add_stock("Soda", 20)
-
-# Добавляем заказ
-customer1 = Customer('Customer 1', {"address": (60, 70)})
+# Добавляем клиента и заказ
+customer1 = Customer('Клиент 1', {"address": (60, 70)})
 order1 = Order(customer1, {"Pizza": 2, "Soda": 1}, 1)
 store.process_order(order1)
 
