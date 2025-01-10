@@ -62,10 +62,10 @@ class TestStore(unittest.TestCase):
         customer = Customer("Test Customer", (60, 70))
         order = Order(customer, {"Pizza": 1})
         self.store.assign_order_id_and_items_count(order)
-        self.store.assign_storekeeper(order)
+        storekeeper = self.store.assign_storekeeper(order)
 
-        self.assertIsNotNone(self.storekeeper.current_order)
-        self.assertEqual(self.storekeeper.current_order.id, order.id)
+        self.assertIsNotNone(storekeeper.current_order)
+        self.assertEqual(storekeeper.current_order.id, order.id)
 
     def test_assign_courier(self):
         """Тестирует назначение курьера на доставку."""
@@ -73,10 +73,10 @@ class TestStore(unittest.TestCase):
         customer = Customer("Test Customer", (60, 70))
         order = Order(customer, {"Pizza": 1})
         self.store.assign_order_id_and_items_count(order)
-        self.store.assign_courier(order)
+        courier = self.store.assign_courier(order)
 
-        self.assertIsNotNone(self.courier.current_order)
-        self.assertEqual(self.courier.current_order.id, order.id)
+        self.assertIsNotNone(courier.current_order)
+        self.assertEqual(courier.current_order.id, order.id)
 
     def test_assign_order_id_and_items_count(self):
         goods = {"Pizza": 10}

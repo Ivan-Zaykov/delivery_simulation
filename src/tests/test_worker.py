@@ -40,7 +40,7 @@ class TestWorker(unittest.TestCase):
         customer = Customer("Test Customer", (60, 70))
         order = Order(customer, {"Pizza": 1})
         self.store.assign_order_id_and_items_count(order)
-        self.storekeeper.assign_order(order)
+        self.storekeeper.collect_order(order)
         self.courier.deliver_order(order)
 
         self.assertEqual(False, self.storekeeper.is_available())  # Сборщик на заказе

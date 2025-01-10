@@ -22,8 +22,18 @@ class Store:
 
     def process_order(self, order):
         self.assign_order_id_and_items_count(order)
-        self.assign_storekeeper(order)
-        self.assign_courier(order)
+
+        storekeeper = self.assign_storekeeper(order)
+        if storekeeper:
+            storekeeper.collect_order()
+        else:
+            print(f"Склад: нет доступных сборщиков для заказа {order.id}.")
+
+        courier = self.assign_courier(order)
+        if courier:
+            courier.deliver_order()
+        else:
+            print(f"Склад: нет доступных курьеров для заказа {order.id}.")
 
     def assign_order_id_and_items_count(self, order):
         print(f"Склад `{self.name}`: получен заказ {order}")
@@ -47,15 +57,16 @@ class Store:
     def assign_storekeeper(self, order):
         storekeeper = next((w for w in self.workers if isinstance(w, Storekeeper) and w.is_available()), None)
         if storekeeper:
-            storekeeper.assign_order(order)
+            storekeeper.current_order = order
+            return storekeeper
         else:
-            print(f"Склад: нет доступных сборщиков для заказа {order.id}.")
-        storekeeper.current_order = None
+            return None
 
     def assign_courier(self, order):
         courier = next((w for w in self.workers if isinstance(w, Courier) and w.is_available()), None)
         if courier:
-            courier.deliver_order(order)
+            courier.current_order = order
+            return courier
         else:
-            print(f"Склад: нет доступных курьеров для заказа {order.id}.")
-        courier.current_order = None
+            return None
+
