@@ -2,14 +2,15 @@
 class Constants:
     TIME_COMPRESSION_RATIO = 1 / 1000
     ORDER_ASSEMBLY_TIME = 45
-    ONE_MINUTE = 60
+    SECONDS_PER_MINUTE = 60
     # Ед.расст-я / сек
     COURIER_SPEED = 1/30
     HOURLY_PAY = 300
+    MINUTES_PER_HOUR = 60
 
     @staticmethod
     def oneMinute():
-        return Constants.ONE_MINUTE * Constants.TIME_COMPRESSION_RATIO
+        return Constants.SECONDS_PER_MINUTE * Constants.TIME_COMPRESSION_RATIO
 
     @staticmethod
     def orderAssemblyTime():

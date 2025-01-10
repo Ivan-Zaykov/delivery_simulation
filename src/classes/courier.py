@@ -20,7 +20,7 @@ class Courier(Worker):
         )
         delivery_time = distance / Constants.courierSpeed() + Constants.oneMinute() + Constants.oneMinute()
         print(f"Курьер `{self.name}` доставляет заказ {order.id}. /"
-              f"Время: {delivery_time / Constants.TIME_COMPRESSION_RATIO / Constants.ONE_MINUTE:.2f} минут.")
+              f"Время: {delivery_time / Constants.TIME_COMPRESSION_RATIO / Constants.SECONDS_PER_MINUTE:.2f} минут.")
         time.sleep(delivery_time)
         print(f"Курьер `{self.name}` доставил заказ {order.id}.")
         self.is_available = True
