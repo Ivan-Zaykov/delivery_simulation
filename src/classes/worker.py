@@ -23,6 +23,9 @@ class Worker:
         self.shift_start = None
 
     def is_available(self):
+        return self.is_on_shift() and self.current_order is None
+
+    def is_on_shift(self):
         current_time = GlobalVirtualTime.get_current_time().time()
         shift_end = (datetime.combine(datetime.min, self.shift_start) + timedelta(hours=self.shift_hours)).time()
         return self.shift_start <= current_time <= shift_end

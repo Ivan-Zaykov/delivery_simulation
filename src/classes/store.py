@@ -50,6 +50,7 @@ class Store:
             storekeeper.assign_order(order)
         else:
             print(f"Склад: нет доступных сборщиков для заказа {order.id}.")
+        storekeeper.current_order = None
 
     def assign_courier(self, order):
         courier = next((w for w in self.workers if isinstance(w, Courier) and w.is_available()), None)
@@ -57,3 +58,4 @@ class Store:
             courier.deliver_order(order)
         else:
             print(f"Склад: нет доступных курьеров для заказа {order.id}.")
+        courier.current_order = None
