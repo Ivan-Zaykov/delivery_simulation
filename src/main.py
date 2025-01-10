@@ -31,12 +31,8 @@ store.workers.append(courier1)
 
 # Добавляем клиента и заказ
 customer1 = Customer('Клиент 1', {"address": (60, 70)})
-order1 = Order(customer1, {"Pizza": 2, "Soda": 1}, 1)
+order1 = Order(customer1, {"Pizza": 2, "Soda": 1})
 store.process_order(order1)
-
-# Назначаем сборщика и курьера
-store.assign_storekeeper(order1)
-store.assign_courier(order1)
 
 # Завершаем смену работников
 storekeeper1.end_shift()

@@ -1,6 +1,18 @@
 class Order:
-    def __init__(self, customer, items, id):
+    def __init__(self, customer, items):
         self.customer = customer
         self.items = items
-        self.id = id
+        self._id = None
         self.status = "Created"
+
+    @property
+    def id(self):
+        return self._id
+
+    @id.setter
+    def id(self, value):
+        if self._id is not None:
+            raise ValueError("ID заказа уже назначен и не может быть изменён.")
+        if not isinstance(value, int) or value <= 0:
+            raise ValueError("ID должен быть положительным целым числом.")
+        self._id = value
