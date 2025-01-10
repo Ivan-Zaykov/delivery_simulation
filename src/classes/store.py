@@ -29,9 +29,9 @@ class Store:
         print(f"Склад: заказ {order.id} готов к сборке: {order.items}")
 
     def assign_storekeeper(self, order):
-        picker = next((w for w in self.workers if isinstance(w, Storekeeper) and w.is_available), None)
-        if picker:
-            picker.assign_order(order)
+        storekeeper = next((w for w in self.workers if isinstance(w, Storekeeper) and w.is_available), None)
+        if storekeeper:
+            storekeeper.assign_order(order)
         else:
             print(f"Склад: нет доступных сборщиков для заказа {order.id}.")
 

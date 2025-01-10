@@ -1,6 +1,6 @@
 
 class Constants:
-    TIME_СOMPRESSION_RATIO = 1/1000
+    TIME_COMPRESSION_RATIO = 1 / 1000
     ORDER_ASSEMBLY_TIME = 45
     ONE_MINUTE = 60
     # Ед.расст-я / сек
@@ -9,12 +9,12 @@ class Constants:
 
     @staticmethod
     def oneMinute():
-        return Constants.ONE_MINUTE * Constants.TIME_СOMPRESSION_RATIO
+        return Constants.ONE_MINUTE * Constants.TIME_COMPRESSION_RATIO
 
     @staticmethod
     def orderAssemblyTime():
-        return Constants.ORDER_ASSEMBLY_TIME * Constants.TIME_СOMPRESSION_RATIO
+        return Constants.ORDER_ASSEMBLY_TIME * Constants.TIME_COMPRESSION_RATIO
 
     @staticmethod
     def courierSpeed():
-        return Constants.COURIER_SPEED / Constants.TIME_СOMPRESSION_RATIO
+        return Constants.COURIER_SPEED / Constants.TIME_COMPRESSION_RATIO

@@ -1,5 +1,6 @@
 from src.utils.constants import Constants
 
+
 class Worker:
     def __init__(self, name):
         self.name = name
