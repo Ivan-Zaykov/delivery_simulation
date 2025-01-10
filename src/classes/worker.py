@@ -13,5 +13,5 @@ class Worker:
 
     def end_shift(self):
         salary = self.shift_hours * Constants.HOURLY_PAY
-        print(f"Работник: `{self.name}` закончил смену. Заработано: {salary} руб.")
+        print(f"Работник `{self.name}` закончил смену. Заработано: {salary} руб.")
         self.shift_hours = 0

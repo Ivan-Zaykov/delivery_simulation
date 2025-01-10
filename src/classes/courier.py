@@ -13,14 +13,14 @@ class Courier(Worker):
     def deliver_order(self, order):
         self.current_order = order
         self.is_available = False
-        print(f"Курьер: `{self.name}` забрал заказ {order.id}.")
+        print(f"Курьер `{self.name}` забрал заказ {order.id}.")
         distance = math.sqrt(
             (order.customer.address[0] - self.store_coords[0]) ** 2 +
             (order.customer.address[1] - self.store_coords[1]) ** 2
         )
         delivery_time = distance / Constants.courierSpeed() + Constants.oneMinute() + Constants.oneMinute()
-        print(f"Курьер: `{self.name}` доставляет заказ {order.id}. /"
+        print(f"Курьер `{self.name}` доставляет заказ {order.id}. /"
               f"Время: {delivery_time / Constants.TIME_COMPRESSION_RATIO / Constants.ONE_MINUTE:.2f} минут.")
         time.sleep(delivery_time)
-        print(f"Курьер: `{self.name}` доставил заказ {order.id}.")
+        print(f"Курьер `{self.name}` доставил заказ {order.id}.")
         self.is_available = True

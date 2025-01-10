@@ -9,6 +9,7 @@ class Store:
         self.orders = []  # Очередь заказов
         self.order_counter = 0  # Счётчик для уникальных ID заказов
         self.workers = []  # Все работники
+        print(f"Инициализирован склад `{self.name}`")
 
     def update_stocks(self, goods):
         print(f"Склад `{self.name}`: обновляет стоки товаров: {goods}")
@@ -17,7 +18,7 @@ class Store:
                 self.stock[item] += qty
             else:
                 self.stock[item] = qty
-            print(f"Склад `{self.name}`: добавлено {qty} единиц товара '{item}'.")
+            print(f"Склад `{self.name}`: добавлено {qty} единиц товара '{item}'")
 
     def process_order(self, order):
         print(f"Склад `{self.name}`: получен заказ {order}")
