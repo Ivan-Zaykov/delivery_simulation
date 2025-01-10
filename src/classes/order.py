@@ -16,3 +16,7 @@ class Order:
         if not isinstance(value, int) or value <= 0:
             raise ValueError("ID должен быть положительным целым числом.")
         self._id = value
+
+    def __str__(self):
+        """Возвращает строковое представление объекта Order."""
+        return f"`customer={self.customer.name}, items={self.items}`"

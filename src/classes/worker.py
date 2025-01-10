@@ -1,3 +1,5 @@
+from datetime import timedelta, datetime
+
 from src.utils.constants import Constants
 from src.utils.virtual_time import GlobalVirtualTime
 
@@ -21,4 +23,5 @@ class Worker:
 
     def is_available(self):
         current_time = GlobalVirtualTime.get_current_time().time()
-        return self.is_available and self.shift_start <= current_time <= self.shift_start + self.shift_hours
+        shift_end = (datetime.combine(datetime.min, self.shift_start) + timedelta(hours=self.shift_hours)).time()
+        return self.shift_start <= current_time <= shift_end

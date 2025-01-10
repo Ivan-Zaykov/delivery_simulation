@@ -40,13 +40,18 @@ store.workers.append(courier1)
 # Добавляем клиента и заказ
 customer1 = Customer('Клиент 1', (60, 70))
 order1 = Order(customer1, {"Pizza": 2, "Soda": 1})
+
+# Склад обрабатывает заказ
 store.process_order(order1)
 
 # Продвигаем время вперёд
-deltaMinutes = 300
+deltaMinutes = 600
 GlobalVirtualTime.advance_time(deltaMinutes)
-print(f"По прошествии {deltaMinutes / Constants.MINUTES_PER_HOUR} часов...")
+print(f"По прошествии {round(deltaMinutes / Constants.MINUTES_PER_HOUR)} часов...")
 
-# Завершаем смену работников
-storekeeper1.end_shift()
-courier1.end_shift()
+# Добавляем клиента и заказ
+customer2 = Customer('Клиент 2', (80, 110))
+order2 = Order(customer1, {"Pizza": 5, "Soda": 3})
+
+# Склад обрабатывает заказ
+store.process_order(order2)

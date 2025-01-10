@@ -43,14 +43,14 @@ class Store:
         self.assign_courier(order)
 
     def assign_storekeeper(self, order):
-        storekeeper = next((w for w in self.workers if isinstance(w, Storekeeper) and w.is_available), None)
+        storekeeper = next((w for w in self.workers if isinstance(w, Storekeeper) and w.is_available()), None)
         if storekeeper:
             storekeeper.assign_order(order)
         else:
             print(f"Склад: нет доступных сборщиков для заказа {order.id}.")
 
     def assign_courier(self, order):
-        courier = next((w for w in self.workers if isinstance(w, Courier) and w.is_available), None)
+        courier = next((w for w in self.workers if isinstance(w, Courier) and w.is_available()), None)
         if courier:
             courier.deliver_order(order)
         else:
