@@ -1,5 +1,13 @@
 
 class Customer:
     def __init__(self, name, address):
-        self.name = name
-        self.address = address
+        self._name = name
+        self._address = address
+
+    @property
+    def name(self):
+        return self._name
+
+    @property
+    def address(self):
+        return self._address

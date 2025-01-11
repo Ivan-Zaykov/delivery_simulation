@@ -64,8 +64,8 @@ class TestStore(unittest.TestCase):
         self.store.assign_order_id_and_items_count(order)
         storekeeper = self.store.assign_storekeeper(order)
 
-        self.assertIsNotNone(storekeeper.current_order)
-        self.assertEqual(storekeeper.current_order.id, order.id)
+        self.assertIsNotNone(storekeeper._current_order)
+        self.assertEqual(storekeeper._current_order.id, order.id)
 
     def test_assign_courier(self):
         """Тестирует назначение курьера на доставку."""
@@ -75,8 +75,8 @@ class TestStore(unittest.TestCase):
         self.store.assign_order_id_and_items_count(order)
         courier = self.store.assign_courier(order)
 
-        self.assertIsNotNone(courier.current_order)
-        self.assertEqual(courier.current_order.id, order.id)
+        self.assertIsNotNone(courier._current_order)
+        self.assertEqual(courier._current_order.id, order.id)
 
     def test_assign_order_id_and_items_count(self):
         goods = {"Pizza": 10}
@@ -91,4 +91,3 @@ class TestStore(unittest.TestCase):
         order2 = Order(customer, {"Pizza": 7})
         self.store.assign_order_id_and_items_count(order2)
         self.assertEqual(5, self.store.orders[order1.id].items['Pizza'])
-

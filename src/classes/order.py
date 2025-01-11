@@ -1,9 +1,20 @@
 class Order:
     def __init__(self, customer, items):
-        self.customer = customer
-        self.items = items
+        self._customer = customer
+        self._items = items
         self._id = None
-        self.status = "Created"
+
+    @property
+    def customer(self):
+        return self._customer
+
+    @property
+    def items(self):
+        return self._items
+
+    @items.setter
+    def items(self, items):
+        self._items = items
 
     @property
     def id(self):
