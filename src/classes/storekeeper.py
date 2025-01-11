@@ -4,7 +4,7 @@ from src.utils.constants import Constants
 
 
 class Storekeeper(Worker):
-    def collect_order(self):
+    def execute_work(self):
         print(f"Сборщик `{self.name}` начал сборку заказа {self._current_order.id}.")
         time.sleep(len(self._current_order.items) * Constants.orderAssemblyTime())
         print(f"Сборщик `{self.name}` завершил сборку заказа {self._current_order.id}.")

@@ -9,7 +9,7 @@ class Courier(Worker):
         super().__init__(name)
         self._store_coords = store_coords
 
-    def deliver_order(self):
+    def execute_work(self):
         print(f"Курьер `{self.name}` забрал заказ {self._current_order.id}.")
         distance = math.sqrt(
             (self._current_order.customer.address[0] - self._store_coords[0]) ** 2 +

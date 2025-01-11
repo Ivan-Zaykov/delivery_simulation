@@ -1,4 +1,5 @@
 from datetime import timedelta, datetime
+from abc import ABC, abstractmethod
 
 from src.utils.constants import Constants
 from src.utils.virtual_time import GlobalVirtualTime
@@ -41,3 +42,7 @@ class Worker:
         current_time = GlobalVirtualTime.get_current_time().time()
         shift_end = (datetime.combine(datetime.min, self._shift_start) + timedelta(hours=self._shift_hours)).time()
         return self._shift_start <= current_time <= shift_end
+
+    @abstractmethod
+    def execute_work(self):
+        pass

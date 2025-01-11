@@ -37,13 +37,13 @@ class Store:
 
         storekeeper = self.assign_storekeeper(order)
         if storekeeper:
-            storekeeper.collect_order()
+            storekeeper.execute_work()
         else:
             print(f"Склад: нет доступных сборщиков для заказа {order.id}.")
 
         courier = self.assign_courier(order)
         if courier:
-            courier.deliver_order()
+            courier.execute_work()
         else:
             print(f"Склад: нет доступных курьеров для заказа {order.id}.")
 
