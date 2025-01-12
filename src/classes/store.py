@@ -1,5 +1,6 @@
 from .storekeeper import Storekeeper
 from .courier import Courier
+import prompt
 
 
 class Store:
@@ -57,12 +58,20 @@ class Store:
 
         available_items = {}
         for item, qty in order.items.items():
+            unsufficient_qty = self.check_is_sufficient_count(item, qty)
+
+            if unsufficient_qty:
+                customer_agree_with_unsufficient = self.check_is_user_agree(item)
+
             if self._stock.get(item, 0) >= qty:
                 available_items[item] = qty
                 self._stock[item] -= qty
-            else:
-                available_items[item] = self._stock.get(item, 0)
-                self._stock[item] = 0
+            elif unsufficient_qty:
+                if customer_agree_with_unsufficient:
+                    available_items[item] = self._stock.get(item, 0)
+                    self._stock[item] = 0
+                else:
+                    pass
         order.items = available_items  # Обновляем заказ
         print(f"Склад `{self._name}`: заказ {order.id} готов к сборке: {order.items}")
 
@@ -81,3 +90,19 @@ class Store:
             return courier
         else:
             return None
+
+    def check_is_sufficient_count(self, item, qty):
+        store_count = self._stock[item]
+
+        return qty > store_count
+
+    def check_is_user_agree(self, item):
+        is_agree = prompt.string("Вы согласны получить не полное количество товара " + item + "(yes/no): ")
+
+        if is_agree == 'yes':
+            return True
+        elif is_agree == 'no':
+            return False
+        else:
+            is_agree = prompt.string("Вы согласны получить не полное количество товара " + item + "(yes/no): ")
+
